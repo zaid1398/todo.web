@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ToDo List</title>
+   <style>
+        .main{
+            width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            box-shadow: 0 0 10px black;
+            padding: 25px;
+            background: linear-gradient(to right, #333133, #b3f1c2, #4c5aaf);
+           border-radius: 28px;
+           height: auto;
+        }
+        div{
+            text-align: center;
+            padding-left: 70px;
+            padding-bottom: 10px;
+        }   
+        button{
+            margin-left: 10px;
+            border-radius: 25px;
+        }
+        span{
+            margin-left: -55px;
+            color: rgb(51, 116, 190);
+        }
+        
+        input{
+            border-radius: 25px;
+        }
+        label{
+            font-size: 28px;
+            text-shadow: 2px 2px #64f304;
+            color: coral;
+        }
+
+   </style>
+</head>
+
+<body>
+    <div class="main">
+    <h1><span class="title">ToDo</span> List</h1>
+    <div class="inputDiv">
+    	 <label> Enter Text</label> <input type="text" class="input">
+    	   <button class="add">Create Next Element</button><br>
+           <span id="error"></span>
+    </div>
+    <div class="container">
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+var inputValue = document.querySelector('.input');
+const add = document.querySelector('.add');
+class item{
+constructor(name){
+this.createItem(name);
+}
+createItem(name){
+var itemBox = document.createElement('div');
+itemBox.classList.add('item');
+
+var input = document.createElement('input');
+input.type = "text";
+input.disabled = true;
+input.value = name;
+input.classList.add('item_input');
+
+var edit = document.createElement('button');
+edit.classList.add('edit');
+edit.innerHTML = "Edit";
+edit.addEventListener('click', () => this.edit(input, name));
+
+var remove = document.createElement('button');
+remove.classList.add('remove');
+remove.innerHTML = "Remove";
+remove.addEventListener('click', () => this.remove(itemBox, name));
+
+container.appendChild(itemBox);
+
+itemBox.appendChild(input);
+itemBox.appendChild(edit);
+itemBox.appendChild(remove);
+
+}
+
+edit(input, name){
+if(input.disabled == true){
+   input.disabled = !input.disabled;
+}
+else{
+    input.disabled = !input.disabled;
+   
+}
+}
+
+ remove(itemBox, name){
+itemBox.parentNode.removeChild(itemBox);
+ }
+}
+
+add.addEventListener('click', check);
+window.addEventListener('keydown', (e) => {
+if(e.which == 13){
+check();
+}
+})
+
+function check(){
+if(inputValue.value=="")
+    {
+        document.getElementById("error").innerHTML="Please Enter the value";
+        return;
+    } else
+    {
+        document.getElementById("error").innerHTML="";
+        new item(inputValue.value);
+    }
+}
+for (var v = 0 ; v < input.length ; v++){
+new item(input[v]);
+}
+    </script>
+</div>             
+</body>
+</html>
